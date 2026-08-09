@@ -23,7 +23,11 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint
+        run: npm run lint:grammar
+        # run: npm run lint
 
       - name: Unit tests
         run: npm test
+
+      - name: Grammar
+        run: npm run lint:grammar

@@ -23,11 +23,27 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint:grammar
-        # run: npm run lint
+        run: npm run lint
 
       - name: Unit tests
         run: npm test
 
       - name: Grammar
         run: npm run lint:grammar
+
+  build:
+    needs: lint-and-test # requires previous step to succeed
+    if: always() # Forces this job to run even if 'build' fails
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build prod
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: 'build artifact'
+          path: build/prod/*.zip
+          if-no-files-found: error
+          retention-days: 5
+          overwrite: true

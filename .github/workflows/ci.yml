@@ -52,7 +52,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: 'build artifact'
+          name: 'build-artifact'
           path: build/prod/*.zip
           if-no-files-found: error
           retention-days: 5
